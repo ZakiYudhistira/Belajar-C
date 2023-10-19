@@ -1,0 +1,14 @@
+prcedure hitungRata2(l : list)
+KAMUS LOKAL
+sum : real
+count : integer
+p : node
+ALGORITMA
+sum <- 0
+count <- 0
+if l = NIL then
+    output("List Kosong")
+else
+    p <- l
+    while(l != nil)do
+        sum <- p.
