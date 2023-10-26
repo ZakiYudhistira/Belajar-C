@@ -1,0 +1,20 @@
+procedure findMaxMin(input l : List)
+KAMUS LOKAL
+p : address
+max, min : Eltype
+
+ALGORITMA
+p <- l
+if (p = NIL) then
+    output("List kosong")
+else
+    max <- p*.info
+    min <- p*.info
+    p <- p*.next
+    while (p != NIL) do
+        if (p*.info > max) then
+            max <- p*.info
+        id (p*.info < min) then
+            min <- p*.info
+        p <- p*.next
+    output(max, min)

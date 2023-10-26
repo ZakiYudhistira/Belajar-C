@@ -10,5 +10,7 @@ if l = NIL then
     output("List Kosong")
 else
     p <- l
-    while(l != nil)do
-        sum <- p.
+    while(p != NIL)do
+        sum <- sum + p*.info
+        count <- count + 1
+    output(sum/count)
