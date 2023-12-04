@@ -1,0 +1,23 @@
+{ADT Set menggunakan Hash}
+constant CAPACITY : integer = 100
+type Eltype : integer
+type set:
+    <buffer : array[CAPACITY] of Eltype,
+    <count : integer>
+
+add(input/output m : set, input value : Eltype)
+{I.S. m adalah set, bisa kosong dan bisa penuh}
+{F.S. ditambahkan value pada set m}
+KAMUS LOKAL
+idx : integer
+ALGORITMA
+idx <- hash(value)
+m.buffer[idx] <- value
+
+remove(input/output m : set, input value : Eltype)
+KAMUS LOKAL
+idx : integer
+ALGORITMA
+idx <- hash(value)
+m.buffer[idx] = NIL
+

@@ -1,0 +1,24 @@
+{ADT SortingHat}
+USE ListLinier
+constant CAPACITY : integer = 100
+type id_anak : integer
+type ArrayNama array[CAPACITY] of strings
+type Asrama : List
+
+{PRIMITIF SELEKTOR}
+getStudentId(name : string) -> integer
+{Mengembalikan ID murid sesuai nama yang berkorespondensi}
+
+{FUNGSI DAN PROSEDUR TAMBAHAN}
+addtoMejaMakan(input/output list_meja_makan : List, input student : id_anak)
+{I.S Meja makan berupa list linier, dapat kosong maupun terisi}
+{F.S Ditambahkan murid di ujung list linier list_meja_makan}
+
+removefromMejaMakan(input/output list_meja_makan : List)
+{I.S list_meja_makan tidak kosong}
+{F.S. ihapus murid terakhir dari list_meja_makan}
+
+assigntoDorm(, input/output gryffindor : List, input/output hufflepuff : List, input/output ravenclaw : List, input/output slytherin : List, input student : id_anak)
+KAMUS LOKAL
+
+ALGORITMA
