@@ -1,0 +1,70 @@
+function bSearch(p : binTree, x : Eltype) -> boolean
+KAMUS LOKAL
+
+ALGORITMA
+if isTreeEmpty(p) then
+    return false
+else
+    depend on x, p.info.key
+        x.info.key < x : bSearch(p.left,x)
+        x.info.key > x : bSearch(p.right,x)
+        x.info.key = x :
+            -> true
+
+isBTree(p : BinTree) -> boolean
+KAMUS LOKAL
+kiri, kanan : integer
+
+ALGORITMA
+if isTreeEmpty(p) then
+    -> true
+else
+    kiri = depth(p.left)
+    kanan = depth(p.right)
+    return abs(kiri - kanan) <= 1 && isBTree(l.left) && isBTree(l.right)
+
+
+depth(p : binTree) -> integer
+KAMUS LOKAL
+kiri, kanan : int
+
+ALGORITMA
+if isOneElmt(p) then
+    -> 1
+else
+    kiri <- depth(p.left)
+    kanan <- depth(p.kanan)
+    if kiri > kanan then
+        -> 1 + kiri
+    else
+        -> 1 + kanan
+
+abs(x : integer) -> integer
+    if x > 0 then
+        -> x
+    else
+        -> -x
+    
+buildBST(infos : array [0 .. 99] of integer, nEff : integer) -> BinTree
+KAMUS LOKAL
+b : binTree
+i : integer
+
+ALGORITMA
+i traversal [0..nEff]
+    if i = 0 then
+        CreateTree(array[i],NIL,NIL,b)
+    else
+        addToTree(b, array[i])
+
+procedure addToTree(input/output b : binTree, input x : integer)
+KAMUS LOKAL
+
+ALGORITMA
+if isTreeEmpty(b) then
+    b = newTreeNode(x)
+else
+    depend on x, b.info.key
+        x < b.info.key : addToTree(b.left)
+        x > b.info.key : addToTree(b.right)
+        x = b.info.key : b.info.count <- b.info.count + 1
