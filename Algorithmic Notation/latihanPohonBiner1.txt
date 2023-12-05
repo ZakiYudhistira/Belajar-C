@@ -1,0 +1,135 @@
+function search(P : BinTree, X : Eltype) -> boolean
+KAMUS LOKAL
+
+ALGORITMA
+if isTreeEmpty(P) then
+    -> false
+else
+    if P.info = X then
+        -> true
+    else
+        -> search(P.left, X) or search(P.right)
+
+isSkewLeft(P : BinTree) -> boolean
+KAMUS LOKAL
+
+ALGORITMA
+if isTreeEmpty(P) then
+    -> true
+else
+    if isUnaryLeft(P) then
+        -> isSkewLeft(left(p))
+    else
+        -> false
+
+isSkewRight(P : BinTree) -> boolean
+KAMUS LOKAL
+
+ALGORITMA
+if isTreeEmpty(P) then
+    -> true
+else
+    if isUnaryRight(P) then
+        -> isSkewRight(right(p))
+    else
+        -> false
+
+level(P : BinTree, X : Eltype) -> integer
+KAMUS LOKAL
+
+ALGORITMA
+    -> levelHelper(P, X, 1)
+
+levelHelper(P : BinTree, X : Eltype, level : integer) -> integer
+KAMUS LOKAL
+levelTemp : integer
+
+ALGORITMA
+if isTreeEmpty(P) then
+    -> 0
+if P.info = X then
+    -> level
+levelTemp <- levelHelper(P.left, X, level + 1)
+if levelTemp != 0 then
+    -> levelTemp
+levelTemp <- levelHelper(P.right, X, level + 1)
+if levelTemp != 0 then
+    -> levelTemp
+
+addDaun(input/output P : BinTree, input X, Y : Eltype, input kiri : boolean)
+KAMUS LOKAL
+Ret : Address
+ALGORITMA
+if getCount(P, X) > 1 then
+    if kiri then
+        addLeft(P,Y)
+    else
+        addRight(P,Y)
+else
+    getAddress(P, X, Ret)
+    if kiri then
+        Ret.left = newTreeNode(Y)
+    else
+        Ret.right = newTreeNode(Y)
+
+getCount(P : BinTree, X : Eltype) -> integer
+KAMUS LOKAL
+
+ALGORITMA
+if isTreeEmpty(P) then
+    -> 0
+else
+    if P.info = X then
+        -> 1 + getCount(P.left,X) + getCount(P.right,X)
+    else
+        -> getCount(P.left,X) + getCount(P.right,X)\
+
+getAddress(P : BinTree, X : Eltype, Ret : Address)
+KAMUS LOKAL
+if isOneElmt(P) then
+    if P.info = X then
+        Ret <- P
+else
+    if not isTreeEmpty(P) then
+        getAddress(P.left, X, Ret)
+        getAddress(P.right, X, Ret)
+
+delDaun(input/output P : BinTree, input X : Eltype)
+KAMUS LOKAL
+temp : Address
+
+ALGORITMA
+if isOneElmt(P) then
+    if P.info = X then
+        temp <- P
+        P = NIL
+        deallocateTreeNode(temp)
+else
+    if not isTreeEmpty(P) then
+        delDaun(P.right, X)
+        delDaun(P.left,X)
+
+makeListDaun(P : BinTree) -> ListOfNode
+KAMUS LOKAL
+temp : Address
+
+ALGORITMA
+if isOneElmt(P) then
+    -> newListNode(P)
+else
+    temp <- makeListDaun(P.left)
+    -> concat(temp, makeListDaun(P.right))
+
+makeListLevel(P : BinTree, N : integer) -> ListOfNode
+KAMUS LOKAL
+temp : Address
+
+ALGORITMA
+if isTreeEmpty(p) then
+    -> NIL
+else
+    if N = 1 then
+        -> newListNode(P.info)
+    else
+        temp <- makeListLevel(P.left, N - 1)
+        -> concat(temp, makeListLevel(P.right, N - 1))
