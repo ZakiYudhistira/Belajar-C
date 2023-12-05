@@ -1,0 +1,106 @@
+function searchNode(g : Graph, x : integer) -> AdrNode
+KAMUS LOKAL
+
+ALGORITMA
+if g = NIL then
+    -> NIL
+else
+    if g.id = x then
+        -> g
+    else
+        -> searchNode(g.next, x)
+
+searchEdge(g : Graph, prec : integer, succ : integer) -> adrSuccNode
+KAMUS LOKAL
+adrPrec : AdrNode
+adrSucc : AdrSuccNode
+
+ALGORITMA
+adrPrec <- search(g, prec)
+adrSuc <- adrPrec.trail
+while adrSuc != NILL && adrSuc.succ.id != succ do
+    adrSuc <- adrSuc.next
+if adrSuc.succ.id == succ then
+    -> adrSuc
+if adrSuc = NIL then
+    -> NIL
+
+insertNode(input/output g : Graph, input x : integer, output pn : adrNode)
+KAMUS LOKAL
+p : adrNode
+
+ALGORITMA
+if g = NIL then
+    g <- newGraphNode(x)
+    pn <- g
+else
+    p <- g
+    while p.next != NIl do
+        p <- p.next
+    pn <- newGraphNode(x)
+    p.next <- pn
+
+insertEdge(input/output g : Graph, input prec, succ : integer)
+KAMUS LOKAL
+adrPrec, adrSuc, param : AdrNode
+trailer : adrSucc
+
+ALGORITMA
+adrPrec <- searchNode(prec)
+adrSuc <- searchNode(succ)
+
+if adrPrec = NIL then
+    insertNode(g, prec, adrPrec)
+if adrSuc = NIL then
+    insertNode(g, succ, adrSuc)
+trailer <- searchEdge(g, prec, succ)
+if trail = NIL then
+    trail <- adrPrec.trail
+    if trail = NIL then
+        adrPrec.trail <- newSuccNode(adrSuc)
+    else
+        while trail.next != NIL do
+            trail <- trail.next
+        trail.next <- newSuccNode(adrSuc)
+
+deleteNode(input/output g : Graph, input x : integer)
+KAMUS LOKAL
+del, p, prevDel : AdrNode
+trailer,prev : adrSuccNode
+found : boolean
+
+ALGORITMA
+p <- g
+del <- search(x)
+while p != NIL do
+    found <- false
+    if p != del then
+        trail <- p.trail
+        prev <- NIL
+        while trail != NIl && !found do
+            if trail.succ = del
+                if prev = NIL then
+                    prev <- trail
+                    prev.next <- trail.next
+                    deallocSuccNode(trail)
+                    p.trail <- prev
+                    found <- true
+                else
+                    prev.next <- trail.next
+                    deallocSuccNode(trail)
+                    found <- true
+            else
+                trail <- trail.next
+    else
+        p <- p.next
+p <- g
+prevDel <- NIL
+while p.next != NIL && p != del do
+    prevDel <- p
+    p <- p.next
+if prevDel = NIL then
+    g <- del.next
+    deallocGraphNode(del)
+else
+    prevDel.next <- del.next
+    deallocGraphNode(del)
